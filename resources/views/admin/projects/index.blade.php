@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col">
             <h1>
-                Dashboard
+                All my Projects
             </h1>
         </div>
     </div>
