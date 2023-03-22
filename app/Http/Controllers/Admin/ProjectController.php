@@ -7,6 +7,9 @@ use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 
+// Helpers
+use Illuminate\Support\Str;
+
 class ProjectController extends Controller
 {
     /**
@@ -16,11 +19,12 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        // $projects = Project::all();
+        $projects = Project::all();
 
-        // return view('admin.projects.index', compact('projects'));
+        // $projects = Project::paginate(5);
+
+        return view('admin.projects.index', compact('projects'));
         
-        return view('admin.projects.index');
     }
 
     /**
@@ -30,7 +34,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.projects.create');
     }
 
     /**
@@ -41,7 +45,12 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        //
+        $data = $request->validated();
+        $data['slug'] = Str::slug($data['title']);
+
+        $newProject = Project::create($data);
+
+        return redirect()->route('admin.projects.show', $newProject->id)->with('success', 'Project added successfully');
     }
 
     /**
@@ -52,7 +61,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        return view('admin.projects.show', compact('project'));
     }
 
     /**
@@ -63,7 +72,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
@@ -75,7 +84,12 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        $data = $request->validated();
+
+        $data['slug']= Str::slug($data['title']);
+        $project->update($data);
+
+        return redirect()->route('admin.projects.show', $project->id)->with('success', 'Project updated successfully!');
     }
 
     /**
@@ -86,6 +100,8 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
+
+        return redirect()->route('admin.projects.index', $project->id)->with('success', 'Project deleted successfully!');
     }
 }
