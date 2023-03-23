@@ -20,7 +20,7 @@
                 @endif
 
                 <p>
-                    {{ $project->description }}
+                    {!! nl2br($project->description) !!}
                 </p>
             </div>
         </div>

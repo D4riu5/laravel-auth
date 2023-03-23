@@ -14,6 +14,9 @@ use App\Http\Requests\UpdateProjectRequest;
 // Helpers
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\newProject;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -61,6 +64,10 @@ class ProjectController extends Controller
         $data['slug'] = Str::slug($data['title']);
 
         $newProject = Project::create($data);
+
+        $loggedUser = Auth::user();
+
+        Mail::to($loggedUser->email)->send(new newProject($newProject));
 
         return redirect()->route('admin.projects.show', $newProject->id)->with('success', 'Project added successfully');
     }
