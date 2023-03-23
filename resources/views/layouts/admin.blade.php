@@ -43,17 +43,18 @@
                 </div>
             </header>
 
-            <div class="container-fluid vh-100">
+            <div class="container-fluid" style="height: calc(100vh - 56px);">
+
                 <div class="row h-100">
                     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark navbar-dark sidebar collapse">
-                        <div class="position-sticky pt-3">
+                        <div class="py-3">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
                                     <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-secondary' : '' }}" href="{{route('admin.dashboard')}}">
                                         <i class="fa-solid fa-tachometer-alt fa-lg fa-fw"></i> Dashboard
                                     </a>
                                     <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.projects.index' ? 'bg-secondary' : '' }}" href="{{route('admin.projects.index')}}">
-                                        <i class="fa-solid fa-file-pen fa-lg fa-fw"></i> Projects
+                                        <i class="fa-solid fa-file-pen fa-lg fa-fw ms-1"></i> Projects
                                     </a>
                                 </li>
                             </ul>
@@ -62,12 +63,13 @@
                         </div>
                     </nav>
 
-                    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 p-2">
+                    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 p-2 d-flex flex-column overflow-auto" style="height: calc(100vh - 56px);">
                         {{ Route::currentRouteName() }}
 
                         @yield('content')
                     </main>
                 </div>
+
             </div>
 
         </div>

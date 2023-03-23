@@ -8,7 +8,7 @@
                     My projects
                 </h1>
 
-                <a href="{{ route('admin.projects.create') }}" class="btn btn-success">
+                <a href="{{ route('admin.projects.create') }}" class="btn btn-success my-2">
                     Add a project
                 </a>
             </div>
@@ -35,17 +35,17 @@
                                 <td>{{ $project->slug }}</td>
                                 <td>
                                     <a href="{{  route('admin.projects.show', $project->id) }}" class="btn btn-primary">
-                                        Details
+                                        <i class="fa-solid fa-circle-info"></i>
                                     </a>
                                     <a href="{{ route('admin.projects.edit', $project->id) }}" class="btn btn-warning">
-                                        Update
+                                        <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
                                     <form class="d-inline-block" action="{{ route('admin.projects.destroy', $project->id) }}" method="POST"
                                         onsubmit="return confirm('Are you sure you want to delete this project');">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger">
-                                            Delete
+                                            <i class="fa-solid fa-trash"></i>
                                         </button>
                                     </form>
                                 </td>
