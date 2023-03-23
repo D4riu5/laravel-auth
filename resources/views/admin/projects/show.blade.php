@@ -13,6 +13,12 @@
                     Slug: {{ $project->slug }}
                 </h6>
 
+                @if ($project->img)
+                    <div>
+                        <img src="{{ asset('storage/'.$project->img) }}" style="height: 400px;" alt="project">
+                    </div>
+                @endif
+
                 <p>
                     {{ $project->description }}
                 </p>

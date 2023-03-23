@@ -14,7 +14,7 @@
 
         <div class="row mb-4">
             <div class="col">
-                <form action="{{ route('admin.projects.store') }}" method="POST">
+                <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <div class="mb-3">
@@ -31,6 +31,13 @@
                         </label>
                         <textarea class="form-control" rows="10" id="description" name="description" required maxlength="4096"
                             placeholder="Insert description...">{{ old('description') }}</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="img" class="form-label">
+                            Project Preview Image
+                        </label>
+                        <input type="file" class="form-control" id="img" name="img" accept="image/*">
                     </div>
 
                     <div>

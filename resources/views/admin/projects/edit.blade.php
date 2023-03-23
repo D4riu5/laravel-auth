@@ -16,7 +16,7 @@
 
         <div class="row mb-4">
             <div class="col">
-                <form action="{{ route('admin.projects.update', $project->id) }}" method="POST">
+                <form action="{{ route('admin.projects.update', $project->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     @method('PUT')
@@ -35,6 +35,27 @@
                         </label>
                         <textarea class="form-control" rows="10" id="description" name="description" required maxlength="4096"
                             placeholder="Insert description...">{{ old('description', $project->description) }}</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="img" class="form-label">
+                            Old image preview
+                        </label>
+
+                        @if ($project->img)
+                            <div class="my-2">
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" name="delete_img" id="delete_img">
+                                    <label class="form-check-label" for="delete_img">
+                                        Remove image
+                                    </label>
+                                </div>
+
+                                <img src="{{ asset('storage/' . $project->img) }}" style="height: 400px;" alt="project">
+                            </div>
+                        @endif
+
+                        <input type="file" class="form-control" id="img" name="img" accept="image/*">
                     </div>
 
                     <div>
